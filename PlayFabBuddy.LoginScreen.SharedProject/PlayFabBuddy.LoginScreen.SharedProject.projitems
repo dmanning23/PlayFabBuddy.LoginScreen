@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>7d33c39a-242f-4705-9462-e54cffe2dec0</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>PlayFabBuddy.LoginScreen.SharedProject</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AccountNotFoundMessageBox.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LoggingInMessageBox.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LoginMessageBox.cs" />
+  </ItemGroup>
+</Project>

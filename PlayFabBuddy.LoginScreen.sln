@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PlayFabBuddy.LoginScreen.SharedProject", "PlayFabBuddy.LoginScreen.SharedProject\PlayFabBuddy.LoginScreen.SharedProject.shproj", "{7D33C39A-242F-4705-9462-E54CFFE2DEC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayFabBuddy.LoginScreen.WindowsDX", "PlayFabBuddy.LoginScreen.WindowsDX\PlayFabBuddy.LoginScreen.WindowsDX.csproj", "{E6C446E2-AAFF-4E87-9498-6F7854EC3566}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayFabBuddy.LoginScreen.iOS", "PlayFabBuddy.LoginScreen.iOS\PlayFabBuddy.LoginScreen.iOS.csproj", "{E71F3053-056C-4381-9638-048ED73BDFF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayFabBuddy.LoginScreen.Android", "PlayFabBuddy.LoginScreen.Android\PlayFabBuddy.LoginScreen.Android.csproj", "{115BDC6D-772C-4B2E-804A-A12BA682CE6F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A8AFCD6-FEFF-43DA-A46B-21729DC788BA}"
+	ProjectSection(SolutionItems) = preProject
+		buildNugetPackages.ps1 = buildNugetPackages.ps1
+		PlayFabBuddy.LoginScreen.nuspec = PlayFabBuddy.LoginScreen.nuspec
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		PlayFabBuddy.LoginScreen.SharedProject\PlayFabBuddy.LoginScreen.SharedProject.projitems*{115bdc6d-772c-4b2e-804a-a12ba682ce6f}*SharedItemsImports = 4
+		PlayFabBuddy.LoginScreen.SharedProject\PlayFabBuddy.LoginScreen.SharedProject.projitems*{7d33c39a-242f-4705-9462-e54cffe2dec0}*SharedItemsImports = 13
+		PlayFabBuddy.LoginScreen.SharedProject\PlayFabBuddy.LoginScreen.SharedProject.projitems*{e6c446e2-aaff-4e87-9498-6f7854ec3566}*SharedItemsImports = 4
+		PlayFabBuddy.LoginScreen.SharedProject\PlayFabBuddy.LoginScreen.SharedProject.projitems*{e71f3053-056c-4381-9638-048ed73bdff6}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6C446E2-AAFF-4E87-9498-6F7854EC3566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6C446E2-AAFF-4E87-9498-6F7854EC3566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6C446E2-AAFF-4E87-9498-6F7854EC3566}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E6C446E2-AAFF-4E87-9498-6F7854EC3566}.Debug|x86.Build.0 = Debug|Any CPU
+		{E6C446E2-AAFF-4E87-9498-6F7854EC3566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6C446E2-AAFF-4E87-9498-6F7854EC3566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6C446E2-AAFF-4E87-9498-6F7854EC3566}.Release|x86.ActiveCfg = Release|Any CPU
+		{E6C446E2-AAFF-4E87-9498-6F7854EC3566}.Release|x86.Build.0 = Release|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Debug|x86.Build.0 = Debug|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Release|x86.ActiveCfg = Release|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Release|x86.Build.0 = Release|Any CPU
+		{115BDC6D-772C-4B2E-804A-A12BA682CE6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{115BDC6D-772C-4B2E-804A-A12BA682CE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{115BDC6D-772C-4B2E-804A-A12BA682CE6F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{115BDC6D-772C-4B2E-804A-A12BA682CE6F}.Debug|x86.Build.0 = Debug|Any CPU
+		{115BDC6D-772C-4B2E-804A-A12BA682CE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{115BDC6D-772C-4B2E-804A-A12BA682CE6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{115BDC6D-772C-4B2E-804A-A12BA682CE6F}.Release|x86.ActiveCfg = Release|Any CPU
+		{115BDC6D-772C-4B2E-804A-A12BA682CE6F}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16A3C21C-E4D4-45DF-B7BD-D27FADDF1CA6}
+	EndGlobalSection
+EndGlobal
