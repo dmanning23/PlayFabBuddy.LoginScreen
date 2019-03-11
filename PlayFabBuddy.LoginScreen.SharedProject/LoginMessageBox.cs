@@ -1,4 +1,5 @@
-﻿using InputHelper;
+﻿using FacebookLoginLib;
+using InputHelper;
 using MenuBuddy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -15,19 +16,22 @@ namespace PlayFabBuddyLib.LoginScreen
 	{
 		#region Propeties
 
+		IPlayFabClient _playfab;
 		IPlayFabAuthService Auth { get; set; }
+		IFacebookService _facebook; 
 
 		ICheckbox _rememberMe;
 		TextEditWithDialog _email;
 		TextEditWithDialog _password;
 		IButton _loginButton;
 		IButton _guestButton;
+		IButton _facebookButton;
 
 		#endregion //Propeties
 
 		#region Methods
 
-		public LoginMessageBox(ContentManager content = null) : base("Login Options", "", content)
+		public LoginMessageBox(ContentManager content = null) : base("", "", content)
 		{
 			CoveredByOtherScreens = false;
 			CoverOtherScreens = true;
@@ -37,19 +41,27 @@ namespace PlayFabBuddyLib.LoginScreen
 		{
 			base.AddAddtionalControls();
 
+			_playfab = ScreenManager.Game.Services.GetService<IPlayFabClient>();
 			Auth = ScreenManager.Game.Services.GetService<IPlayFabAuthService>();
 			Auth.OnLoginSuccess -= Auth_OnLoginSuccess;
 			Auth.OnPlayFabError -= Auth_OnPlayFabError;
 			Auth.OnLoginSuccess += Auth_OnLoginSuccess;
 			Auth.OnPlayFabError += Auth_OnPlayFabError;
+			_facebook = ScreenManager.Game.Services.GetService<IFacebookService>();
 
 			if (null == Auth)
 			{
 				throw new Exception("You forgot to add an IPlayFabAuthService to Game.Services");
 			}
 
-			//add a shim between the text and the buttons
-			ControlStack.AddItem(new Shim() { Size = new Vector2(0, 16f) });
+			ControlStack.AddItem(new Label("Sign In", Content, FontSize.Medium)
+			{
+				Horizontal = HorizontalAlignment.Center,
+				Vertical = VerticalAlignment.Bottom,
+				Highlightable = false,
+			});
+			AddShim();
+			AddShim();
 
 			var controlSize = new Vector2(Resolution.ScreenArea.Width * 0.8f, 48f);
 
@@ -58,6 +70,9 @@ namespace PlayFabBuddyLib.LoginScreen
 
 			//create the password edit box
 			AddPasswordEditBox(controlSize);
+
+			//add the Remember checkbox
+			AddRememberCheckbox(controlSize);
 
 			//create the Login/Register button
 			AddLogRegisterButton(controlSize);
@@ -69,11 +84,16 @@ namespace PlayFabBuddyLib.LoginScreen
 
 			AddShim();
 
+			//Add the facebook button
+			if (null != _facebook)
+			{
+				AddFacebookButton(controlSize);
+				AddOrText();
+				AddShim();
+			}
+
 			//add the Guest button
 			AddGuestButton(controlSize);
-
-			//add the Remember checkbox
-			AddRememberCheckbox(controlSize);
 		}
 
 		public override void UnloadContent()
@@ -193,6 +213,26 @@ namespace PlayFabBuddyLib.LoginScreen
 			AddShim();
 		}
 
+		private void AddFacebookButton(Vector2 controlSize)
+		{
+			_facebookButton = new RelativeLayoutButton()
+			{
+				Vertical = VerticalAlignment.Center,
+				Horizontal = HorizontalAlignment.Center,
+				Size = controlSize,
+				HasBackground = true,
+			};
+			_facebookButton.AddItem(new Label(@"f Connect", Content, FontSize.Small)
+			{
+				Vertical = VerticalAlignment.Center,
+				Horizontal = HorizontalAlignment.Center,
+			});
+			ControlStack.AddItem(_facebookButton);
+			_facebookButton.OnClick += _facebookButton_OnClick; ;
+
+			AddShim();
+		}
+
 		private void AddGuestButton(Vector2 controlSize)
 		{
 			_guestButton = new RelativeLayoutButton()
@@ -215,35 +255,58 @@ namespace PlayFabBuddyLib.LoginScreen
 
 		private void AddRememberCheckbox(Vector2 controlSize)
 		{
+			//add the relative layout for the whole tow
 			var remeberRow = new RelativeLayout()
 			{
 				Size = controlSize,
 				Vertical = VerticalAlignment.Center,
 				Horizontal = HorizontalAlignment.Center,
 			};
-			var remeberLayout = new StackLayout(StackAlignment.Left)
+
+			//add the button & the checkbox
+			var rememberButton = new RelativeLayoutButton()
 			{
+				Size = new Vector2(controlSize.X / 2, controlSize.Y),
 				Horizontal = HorizontalAlignment.Left,
 				Vertical = VerticalAlignment.Center,
 			};
 			_rememberMe = new Checkbox(Auth.RememberMe)
 			{
-				Size = new Vector2(32f, 32f),
+				Size = new Vector2(24f, 24f),
 				Horizontal = HorizontalAlignment.Left,
 				Vertical = VerticalAlignment.Center,
 				Highlightable = true,
 			};
-			remeberLayout.AddItem(_rememberMe);
-			remeberLayout.AddItem(new Label(" Remember Me", Content, FontSize.Small)
+			rememberButton.AddItem(_rememberMe);
+			rememberButton.AddItem(new Label(" Remember Me", Content, FontSize.Small)
+			{
+				Horizontal = HorizontalAlignment.Center,
+				Vertical = VerticalAlignment.Center,
+				Highlightable = false,
+				Scale = 0.7f,
+			});
+			remeberRow.AddItem(rememberButton);
+			_rememberMe.OnClick += RememberCheckbox_OnClick;
+			rememberButton.OnClick += RemeberRow_OnClick;
+
+			//add the button and the Forgot Password button
+			var forgotButton = new RelativeLayoutButton()
+			{
+				Size = new Vector2(controlSize.X / 2, controlSize.Y),
+				Horizontal = HorizontalAlignment.Right,
+				Vertical = VerticalAlignment.Center,
+			};
+			forgotButton.AddItem(new Label("Forgot Password", Content, FontSize.Small)
 			{
 				Horizontal = HorizontalAlignment.Right,
 				Vertical = VerticalAlignment.Center,
-				Highlightable = false,
+				Highlightable = true,
+				Scale = 0.7f,
 			});
-			remeberRow.AddItem(remeberLayout);
-			ControlStack.AddItem(remeberRow);
+			remeberRow.AddItem(forgotButton);
+			forgotButton.OnClick += ForgotButton_OnClick;
 
-			_rememberMe.OnClick += RememberCheckbox_OnClick;
+			ControlStack.AddItem(remeberRow);
 		}
 
 		#endregion //Add Controls
@@ -299,6 +362,16 @@ namespace PlayFabBuddyLib.LoginScreen
 			}
 		}
 
+		private void _facebookButton_OnClick(object sender, ClickEventArgs e)
+		{
+			DisableButtons();
+			Auth.AuthType = AuthType.Facebook;
+			Task.Run(async () =>
+			{
+				await Auth.Authenticate();
+			});
+		}
+
 		private void Guest_OnClick(object sender, ClickEventArgs e)
 		{
 			DisableButtons();
@@ -309,21 +382,57 @@ namespace PlayFabBuddyLib.LoginScreen
 			});
 		}
 
+		private void RemeberRow_OnClick(object sender, ClickEventArgs e)
+		{
+			_rememberMe.IsChecked = !_rememberMe.IsChecked;
+			RememberCheckbox_OnClick(sender, e);
+		}
+
 		private void RememberCheckbox_OnClick(object sender, ClickEventArgs e)
 		{
 			Auth.RememberMe = _rememberMe.IsChecked;
+		}
+
+		private void ForgotButton_OnClick(object sender, ClickEventArgs e)
+		{
+			if (string.IsNullOrEmpty(Auth.Email))
+			{
+				ScreenManager.AddScreen(new OkScreen("No email address provided.", Content));
+			}
+			else
+			{
+				Task.Run(async () =>
+				{
+					var result = await _playfab.SendAccountRecoveryEmailAsync(new SendAccountRecoveryEmailRequest()
+					{
+						Email = Auth.Email,
+						TitleId = PlayFabSettings.TitleId
+					});
+
+					if (null != result.Error)
+					{
+						ScreenManager.AddScreen(new OkScreen(result.Error.ErrorMessage, Content));
+					}
+					else
+					{
+						ScreenManager.AddScreen(new OkScreen("An email was sent with instructions to reset the password.", Content));
+					}
+				});
+			}
 		}
 
 		private void DisableButtons()
 		{
 			_loginButton.Clickable = false;
 			_guestButton.Clickable = false;
+			_facebookButton.Clickable = false;
 		}
 
 		private void EnableButtons()
 		{
 			_loginButton.Clickable = true;
 			_guestButton.Clickable = true;
+			_facebookButton.Clickable = true;
 		}
 
 		#endregion //Input Response
