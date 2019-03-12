@@ -56,10 +56,10 @@
       <Version>2.0.18</Version>
     </PackageReference>
     <PackageReference Include="PlayFabBuddy.Auth">
-      <Version>2.0.10</Version>
+      <Version>2.0.12</Version>
     </PackageReference>
     <PackageReference Include="PlayFabBuddy.Core">
-      <Version>2.0.4</Version>
+      <Version>2.0.5</Version>
     </PackageReference>
     <PackageReference Include="Plugin.CurrentActivity">
       <Version>2.1.0.4</Version>

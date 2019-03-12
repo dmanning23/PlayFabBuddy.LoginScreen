@@ -60,8 +60,7 @@ namespace PlayFabBuddyLib.LoginScreen
 				Vertical = VerticalAlignment.Bottom,
 				Highlightable = false,
 			});
-			AddShim();
-			AddShim();
+			AddShim(64f);
 
 			var controlSize = new Vector2(Resolution.ScreenArea.Width * 0.8f, 48f);
 
@@ -77,21 +76,15 @@ namespace PlayFabBuddyLib.LoginScreen
 			//create the Login/Register button
 			AddLogRegisterButton(controlSize);
 
-			AddShim();
-
-			//add the Or text
-			AddOrText();
-
-			AddShim();
+			AddShim(64f);
 
 			//Add the facebook button
 			if (null != _facebook)
 			{
 				AddFacebookButton(controlSize);
-				AddOrText();
-				AddShim();
+				AddShim(16f);
 			}
-
+			
 			//add the Guest button
 			AddGuestButton(controlSize);
 		}
@@ -103,9 +96,9 @@ namespace PlayFabBuddyLib.LoginScreen
 			Auth.OnPlayFabError -= Auth_OnPlayFabError;
 		}
 
-		private void AddShim()
+		private void AddShim(float height = 8f)
 		{
-			ControlStack.AddItem(new Shim() { Size = new Vector2(0, 8f) });
+			ControlStack.AddItem(new Shim() { Size = new Vector2(0, height) });
 		}
 
 		protected override void AddButtons(StackLayout stack)
@@ -187,7 +180,7 @@ namespace PlayFabBuddyLib.LoginScreen
 			{
 				Vertical = VerticalAlignment.Center,
 				Horizontal = HorizontalAlignment.Center,
-				Size = controlSize,
+				Size = new Vector2(controlSize.X, controlSize.Y * 1.4f),
 				HasBackground = true,
 			};
 			_loginButton.AddItem(new Label(@"Login/Register", Content, FontSize.Small)
@@ -200,26 +193,15 @@ namespace PlayFabBuddyLib.LoginScreen
 
 			AddShim();
 		}
-
-		private void AddOrText()
-		{
-			ControlStack.AddItem(new Label(@"Or", Content, FontSize.Small)
-			{
-				Vertical = VerticalAlignment.Center,
-				Horizontal = HorizontalAlignment.Center,
-				Highlightable = false,
-			});
-
-			AddShim();
-		}
-
+		
 		private void AddFacebookButton(Vector2 controlSize)
 		{
+			//add the facebook button
 			_facebookButton = new RelativeLayoutButton()
 			{
 				Vertical = VerticalAlignment.Center,
 				Horizontal = HorizontalAlignment.Center,
-				Size = controlSize,
+				Size = new Vector2(controlSize.X, controlSize.Y * 1.4f),
 				HasBackground = true,
 			};
 			_facebookButton.AddItem(new Label(@"f Connect", Content, FontSize.Small)
@@ -229,17 +211,15 @@ namespace PlayFabBuddyLib.LoginScreen
 			});
 			ControlStack.AddItem(_facebookButton);
 			_facebookButton.OnClick += _facebookButton_OnClick; ;
-
-			AddShim();
 		}
 
-		private void AddGuestButton(Vector2 controlSize)
+			private void AddGuestButton(Vector2 controlSize)
 		{
 			_guestButton = new RelativeLayoutButton()
 			{
 				Vertical = VerticalAlignment.Center,
 				Horizontal = HorizontalAlignment.Center,
-				Size = controlSize,
+				Size = new Vector2(controlSize.X, controlSize.Y * 1.4f),
 				HasBackground = true,
 			};
 			_guestButton.AddItem(new Label(@"Guest", Content, FontSize.Small)
@@ -249,13 +229,11 @@ namespace PlayFabBuddyLib.LoginScreen
 			});
 			ControlStack.AddItem(_guestButton);
 			_guestButton.OnClick += Guest_OnClick;
-
-			AddShim();
 		}
 
 		private void AddRememberCheckbox(Vector2 controlSize)
 		{
-			//add the relative layout for the whole tow
+			//add the relative layout for the whole row
 			var remeberRow = new RelativeLayout()
 			{
 				Size = controlSize,
