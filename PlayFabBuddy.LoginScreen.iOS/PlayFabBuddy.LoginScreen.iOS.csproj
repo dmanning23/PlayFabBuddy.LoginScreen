@@ -86,7 +86,7 @@
       <HintPath>..\packages\SimpleStorage.1.4.19\lib\Xamarin.iOS10\PerpetualEngine.SimpleStorage.iOS.dll</HintPath>
     </Reference>
     <Reference Include="PlayFabBuddy.Auth.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PlayFabBuddy.Auth.2.0.12\lib\Xamarin.iOS10\PlayFabBuddy.Auth.iOS.dll</HintPath>
+      <HintPath>..\packages\PlayFabBuddy.Auth.2.0.13\lib\Xamarin.iOS10\PlayFabBuddy.Auth.iOS.dll</HintPath>
     </Reference>
     <Reference Include="PlayFabBuddy.Core.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PlayFabBuddy.Core.2.0.5\lib\Xamarin.iOS10\PlayFabBuddy.Core.iOS.dll</HintPath>
