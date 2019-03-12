@@ -136,6 +136,7 @@ namespace PlayFabBuddyLib.LoginScreen
 				if (!string.IsNullOrEmpty(result))
 				{
 					ScreenManager.AddScreen(new OkScreen(result, Content));
+					EnableButtons();
 				}
 				else
 				{
