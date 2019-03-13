@@ -1,12 +1,11 @@
-﻿using InputHelper;
+﻿using FontBuddyPlusLib;
+using InputHelper;
 using MenuBuddy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using PlayFabBuddyLib.Auth;
+using PlayFabBuddyLib.DisplayName;
 using ResolutionBuddy;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PlayFabBuddyLib.LoginScreen
@@ -74,8 +73,14 @@ namespace PlayFabBuddyLib.LoginScreen
 
 		private void AddDisplayNameEditBox(Vector2 controlSize)
 		{
+			var font = new FontBuddyPlus()
+			{
+				FontSize = 48f
+			};
+			font.LoadContent(Content, LoginStyleSheet.DisplayNameFontResource);
+
 			var text = !String.IsNullOrEmpty(_displayName) ? _displayName : "Display Name...";
-			DisplayNameEditBox = new TextEditWithDialog(text, Content, FontSize.Small)
+			DisplayNameEditBox = new TextEditWithDialog(text, font)
 			{
 				Vertical = VerticalAlignment.Center,
 				Horizontal = HorizontalAlignment.Center,

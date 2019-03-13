@@ -1,8 +1,10 @@
 ﻿using FacebookLoginLib;
+using FontBuddyPlusLib;
 using InputHelper;
 using MenuBuddy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using PlayFab;
 using PlayFab.ClientModels;
 using PlayFabBuddyLib.Auth;
@@ -134,8 +136,14 @@ namespace PlayFabBuddyLib.LoginScreen
 
 		private void AddEmailEditBox(Vector2 controlSize)
 		{
+			var font = new FontBuddyPlus()
+			{
+				FontSize = 48f
+			};
+			font.LoadContent(Content, LoginStyleSheet.DisplayNameFontResource);
+
 			var text = !String.IsNullOrEmpty(Auth.Email) ? Auth.Email : "Email address...";
-			_email = new TextEditWithDialog(text, Content, FontSize.Small)
+			_email = new TextEditWithDialog(text, font)
 			{
 				Vertical = VerticalAlignment.Center,
 				Horizontal = HorizontalAlignment.Center,
@@ -202,13 +210,25 @@ namespace PlayFabBuddyLib.LoginScreen
 				Vertical = VerticalAlignment.Center,
 				Horizontal = HorizontalAlignment.Center,
 				Size = new Vector2(controlSize.X, controlSize.Y * 1.4f),
-				HasBackground = true,
+				HasBackground = false,
 			};
-			_facebookButton.AddItem(new Label(@"f Connect", Content, FontSize.Small)
+			_facebookButton.AddItem(new Image(Content.Load<Texture2D>(LoginStyleSheet.FacebookButtonBackgroundImage))
 			{
+				Size = _facebookButton.Rect.Size.ToVector2(),
+				FillRect = true,
 				Vertical = VerticalAlignment.Center,
 				Horizontal = HorizontalAlignment.Center,
+				Layer = 10,
 			});
+			if (LoginStyleSheet.AddFacebookButtonText)
+			{
+				_facebookButton.AddItem(new Label(@"f Connect", Content, FontSize.Small)
+				{
+					Vertical = VerticalAlignment.Center,
+					Horizontal = HorizontalAlignment.Center,
+					Layer = 11,
+				});
+			}
 			ControlStack.AddItem(_facebookButton);
 			_facebookButton.OnClick += _facebookButton_OnClick; ;
 		}
