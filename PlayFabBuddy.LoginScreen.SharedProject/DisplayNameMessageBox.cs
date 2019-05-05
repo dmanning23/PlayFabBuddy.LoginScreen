@@ -89,6 +89,7 @@ namespace PlayFabBuddyLib.LoginScreen
 				MessageBoxTitle = "Display Name",
 				MessageBoxDescription = "Enter your display name:",
 				IsPassword = false,
+				TextColor = StyleSheet.MessageBoxTextColor,
 			};
 			ControlStack.AddItem(DisplayNameEditBox);
 			DisplayNameEditBox.OnPopupDialog += DisplayName_OnPopupDialog;

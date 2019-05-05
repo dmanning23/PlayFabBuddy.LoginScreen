@@ -20,7 +20,7 @@ namespace PlayFabBuddyLib.LoginScreen
 
 		IPlayFabClient _playfab;
 		IPlayFabAuthService Auth { get; set; }
-		IFacebookService _facebook; 
+		IFacebookService _facebook;
 
 		ICheckbox _rememberMe;
 		TextEditWithDialog _email;
@@ -37,6 +37,13 @@ namespace PlayFabBuddyLib.LoginScreen
 		{
 			CoveredByOtherScreens = false;
 			CoverOtherScreens = true;
+		}
+
+		public override void LoadContent()
+		{
+			base.LoadContent();
+
+			AddCancelButton();
 		}
 
 		protected override void AddAddtionalControls()
@@ -56,11 +63,16 @@ namespace PlayFabBuddyLib.LoginScreen
 				throw new Exception("You forgot to add an IPlayFabAuthService to Game.Services");
 			}
 
+			AddShim(64f);
+
 			ControlStack.AddItem(new Label("Sign In", Content, FontSize.Medium)
 			{
 				Horizontal = HorizontalAlignment.Center,
 				Vertical = VerticalAlignment.Bottom,
 				Highlightable = false,
+				TextColor = StyleSheet.MessageBoxTextColor,
+				ShadowColor = Color.Transparent,
+				Scale = 1.3f,
 			});
 			AddShim(64f);
 
@@ -86,9 +98,11 @@ namespace PlayFabBuddyLib.LoginScreen
 				AddFacebookButton(controlSize);
 				AddShim(16f);
 			}
-			
+
 			//add the Guest button
 			AddGuestButton(controlSize);
+
+			AddShim(64f);
 		}
 
 		public override void UnloadContent()
@@ -152,6 +166,7 @@ namespace PlayFabBuddyLib.LoginScreen
 				MessageBoxTitle = "Email",
 				MessageBoxDescription = "Enter your email address:",
 				IsPassword = false,
+				TextColor = StyleSheet.MessageBoxTextColor,
 			};
 			ControlStack.AddItem(_email);
 			_email.OnPopupDialog += _email_OnPopupDialog;
@@ -174,6 +189,8 @@ namespace PlayFabBuddyLib.LoginScreen
 				MessageBoxTitle = "Password",
 				MessageBoxDescription = "Enter your password:",
 				IsPassword = hasPassword,
+				TextColor = StyleSheet.MessageBoxTextColor,
+				Highlightable = false,
 			};
 			ControlStack.AddItem(_password);
 			_password.OnPopupDialog += _password_OnPopupDialog;
@@ -190,18 +207,20 @@ namespace PlayFabBuddyLib.LoginScreen
 				Horizontal = HorizontalAlignment.Center,
 				Size = new Vector2(controlSize.X, controlSize.Y * 1.4f),
 				HasBackground = true,
+				Highlightable = false,
 			};
 			_loginButton.AddItem(new Label(@"Login/Register", Content, FontSize.Small)
 			{
 				Vertical = VerticalAlignment.Center,
 				Horizontal = HorizontalAlignment.Center,
+				Highlightable = false,
 			});
 			ControlStack.AddItem(_loginButton);
 			_loginButton.OnClick += LoginRegister_OnClick;
 
 			AddShim();
 		}
-		
+
 		private void AddFacebookButton(Vector2 controlSize)
 		{
 			//add the facebook button
@@ -211,6 +230,7 @@ namespace PlayFabBuddyLib.LoginScreen
 				Horizontal = HorizontalAlignment.Center,
 				Size = new Vector2(controlSize.X, controlSize.Y * 1.4f),
 				HasBackground = false,
+				Highlightable = false,
 			};
 			_facebookButton.AddItem(new Image(Content.Load<Texture2D>(LoginStyleSheet.FacebookButtonBackgroundImage))
 			{
@@ -227,13 +247,14 @@ namespace PlayFabBuddyLib.LoginScreen
 					Vertical = VerticalAlignment.Center,
 					Horizontal = HorizontalAlignment.Center,
 					Layer = 11,
+					Highlightable = false,
 				});
 			}
 			ControlStack.AddItem(_facebookButton);
 			_facebookButton.OnClick += _facebookButton_OnClick; ;
 		}
 
-			private void AddGuestButton(Vector2 controlSize)
+		private void AddGuestButton(Vector2 controlSize)
 		{
 			_guestButton = new RelativeLayoutButton()
 			{
@@ -241,11 +262,13 @@ namespace PlayFabBuddyLib.LoginScreen
 				Horizontal = HorizontalAlignment.Center,
 				Size = new Vector2(controlSize.X, controlSize.Y * 1.4f),
 				HasBackground = true,
+				Highlightable = false,
 			};
 			_guestButton.AddItem(new Label(@"Guest", Content, FontSize.Small)
 			{
 				Vertical = VerticalAlignment.Center,
 				Horizontal = HorizontalAlignment.Center,
+				Highlightable = false,
 			});
 			ControlStack.AddItem(_guestButton);
 			_guestButton.OnClick += Guest_OnClick;
@@ -267,6 +290,7 @@ namespace PlayFabBuddyLib.LoginScreen
 				Size = new Vector2(controlSize.X / 2, controlSize.Y),
 				Horizontal = HorizontalAlignment.Left,
 				Vertical = VerticalAlignment.Center,
+				Highlightable = false,
 			};
 			_rememberMe = new Checkbox(Auth.RememberMe)
 			{
@@ -282,6 +306,7 @@ namespace PlayFabBuddyLib.LoginScreen
 				Vertical = VerticalAlignment.Center,
 				Highlightable = false,
 				Scale = 0.7f,
+				TextColor = StyleSheet.MessageBoxTextColor,
 			});
 			remeberRow.AddItem(rememberButton);
 			_rememberMe.OnClick += RememberCheckbox_OnClick;
@@ -293,13 +318,15 @@ namespace PlayFabBuddyLib.LoginScreen
 				Size = new Vector2(controlSize.X / 2, controlSize.Y),
 				Horizontal = HorizontalAlignment.Right,
 				Vertical = VerticalAlignment.Center,
+				Highlightable = false,
 			};
 			forgotButton.AddItem(new Label("Forgot Password", Content, FontSize.Small)
 			{
 				Horizontal = HorizontalAlignment.Right,
 				Vertical = VerticalAlignment.Center,
-				Highlightable = true,
+				Highlightable = false,
 				Scale = 0.7f,
+				TextColor = StyleSheet.MessageBoxTextColor,
 			});
 			remeberRow.AddItem(forgotButton);
 			forgotButton.OnClick += ForgotButton_OnClick;
