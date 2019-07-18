@@ -450,14 +450,20 @@ namespace PlayFabBuddyLib.LoginScreen
 		{
 			_loginButton.Clickable = false;
 			_guestButton.Clickable = false;
-			_facebookButton.Clickable = false;
+			if (null != _facebookButton)
+			{
+				_facebookButton.Clickable = false;
+			}
 		}
 
 		private void EnableButtons()
 		{
 			_loginButton.Clickable = true;
 			_guestButton.Clickable = true;
-			_facebookButton.Clickable = true;
+			if (null != _facebookButton)
+			{
+				_facebookButton.Clickable = true;
+			}
 		}
 
 		#endregion //Input Response

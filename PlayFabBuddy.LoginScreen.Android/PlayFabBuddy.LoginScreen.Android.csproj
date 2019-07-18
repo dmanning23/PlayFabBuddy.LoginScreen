@@ -53,16 +53,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FontBuddyPlus">
-      <Version>2.0.4</Version>
+      <Version>2.0.6</Version>
     </PackageReference>
     <PackageReference Include="MenuBuddy">
-      <Version>2.0.29</Version>
+      <Version>2.0.35</Version>
     </PackageReference>
     <PackageReference Include="PlayFabBuddy.Auth">
       <Version>2.0.15</Version>
     </PackageReference>
     <PackageReference Include="PlayFabBuddy.Core">
-      <Version>2.0.7</Version>
+      <Version>2.0.9</Version>
     </PackageReference>
     <PackageReference Include="PlayFabBuddy.DisplayName">
       <Version>2.0.1</Version>
@@ -74,7 +74,7 @@
       <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="SpriteFontPlus.MonoGame">
-      <Version>0.6.5.20</Version>
+      <Version>0.7.0.22</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.DeviceInfo">
       <Version>4.1.1</Version>
