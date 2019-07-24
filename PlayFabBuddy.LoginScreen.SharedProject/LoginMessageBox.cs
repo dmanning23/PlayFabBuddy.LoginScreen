@@ -431,7 +431,7 @@ namespace PlayFabBuddyLib.LoginScreen
 					var result = await _playfab.SendAccountRecoveryEmailAsync(new SendAccountRecoveryEmailRequest()
 					{
 						Email = Auth.Email,
-						TitleId = PlayFabSettings.TitleId
+						TitleId = PlayFabSettings.staticSettings.TitleId
 					});
 
 					if (null != result.Error)
