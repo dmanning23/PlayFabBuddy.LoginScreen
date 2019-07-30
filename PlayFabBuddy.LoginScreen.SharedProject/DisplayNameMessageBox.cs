@@ -32,9 +32,9 @@ namespace PlayFabBuddyLib.LoginScreen
 			CoverOtherScreens = true;
 		}
 
-		protected override void AddAddtionalControls()
+		protected override async Task AddAdditionalControls()
 		{
-			base.AddAddtionalControls();
+			await base.AddAdditionalControls();
 
 			_displayNameService = ScreenManager.Game.Services.GetService<IPlayFabDisplayNameService>();
 
@@ -133,22 +133,19 @@ namespace PlayFabBuddyLib.LoginScreen
 			_displayName = e.Text;
 		}
 
-		private void Update_OnClick(object sender, ClickEventArgs e)
+		private async void Update_OnClick(object sender, ClickEventArgs e)
 		{
 			DisableButtons();
-			Task.Run(async () =>
+			var result = await _displayNameService.SetDisplayName(_displayName);
+			if (!string.IsNullOrEmpty(result))
 			{
-				var result = await _displayNameService.SetDisplayName(_displayName);
-				if (!string.IsNullOrEmpty(result))
-				{
-					ScreenManager.AddScreen(new OkScreen(result, Content));
-					EnableButtons();
-				}
-				else
-				{
-					ExitScreen();
-				}
-			});
+				await ScreenManager.AddScreen(new OkScreen(result, Content));
+				EnableButtons();
+			}
+			else
+			{
+				ExitScreen();
+			}
 		}
 
 		private void DisableButtons()

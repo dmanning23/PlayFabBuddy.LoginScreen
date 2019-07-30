@@ -39,16 +39,16 @@ namespace PlayFabBuddyLib.LoginScreen
 			CoverOtherScreens = true;
 		}
 
-		public override void LoadContent()
+		public override async Task LoadContent()
 		{
-			base.LoadContent();
+			await base.LoadContent();
 
 			AddCancelButton();
 		}
 
-		protected override void AddAddtionalControls()
+		protected override async Task AddAdditionalControls()
 		{
-			base.AddAddtionalControls();
+			await base.AddAdditionalControls();
 
 			_playfab = ScreenManager.Game.Services.GetService<IPlayFabClient>();
 			Auth = ScreenManager.Game.Services.GetService<IPlayFabAuthService>();
@@ -122,18 +122,18 @@ namespace PlayFabBuddyLib.LoginScreen
 			//Don't add Ok or Cancel buttons to this message box, the user has to select one of the provided options.
 		}
 
-		private void Auth_OnPlayFabError(PlayFabError error)
+		private async void Auth_OnPlayFabError(PlayFabError error)
 		{
 			switch (error.Error)
 			{
 				case PlayFabErrorCode.AccountNotFound:
 					{
-						ScreenManager.AddScreen(new AccountNotFoundMessageBox(Content), null);
+						await ScreenManager.AddScreen(new AccountNotFoundMessageBox(Content), null);
 					}
 					break;
 				default:
 					{
-						ScreenManager.AddScreen(new OkScreen(error.ErrorMessage, Content), null);
+						await ScreenManager.AddScreen(new OkScreen(error.ErrorMessage, Content), null);
 					}
 					break;
 			}
@@ -365,46 +365,37 @@ namespace PlayFabBuddyLib.LoginScreen
 			Auth.Password = e.Text;
 		}
 
-		private void LoginRegister_OnClick(object sender, ClickEventArgs e)
+		private async void LoginRegister_OnClick(object sender, ClickEventArgs e)
 		{
 			//check that an email and password were provided
 			if (string.IsNullOrEmpty(Auth.Email))
 			{
-				ScreenManager.AddScreen(new OkScreen("Please enter your email address", Content), null);
+				await ScreenManager.AddScreen(new OkScreen("Please enter your email address", Content), null);
 			}
 			else if (string.IsNullOrEmpty(Auth.Password))
 			{
-				ScreenManager.AddScreen(new OkScreen("Please enter your password", Content), null);
+				await ScreenManager.AddScreen(new OkScreen("Please enter your password", Content), null);
 			}
 			else
 			{
 				DisableButtons();
 				Auth.AuthType = AuthType.EmailAndPassword;
-				Task.Run(async () =>
-				{
-					await Auth.Authenticate();
-				});
+				await Auth.Authenticate().ConfigureAwait(false);
 			}
 		}
 
-		private void _facebookButton_OnClick(object sender, ClickEventArgs e)
+		private async void _facebookButton_OnClick(object sender, ClickEventArgs e)
 		{
 			DisableButtons();
 			Auth.AuthType = AuthType.Facebook;
-			Task.Run(async () =>
-			{
-				await Auth.Authenticate();
-			});
+			await Auth.Authenticate().ConfigureAwait(false);
 		}
 
-		private void Guest_OnClick(object sender, ClickEventArgs e)
+		private async void Guest_OnClick(object sender, ClickEventArgs e)
 		{
 			DisableButtons();
 			Auth.AuthType = AuthType.Silent;
-			Task.Run(async () =>
-			{
-				await Auth.Authenticate();
-			});
+			await Auth.Authenticate().ConfigureAwait(false);
 		}
 
 		private void RemeberRow_OnClick(object sender, ClickEventArgs e)
@@ -418,31 +409,28 @@ namespace PlayFabBuddyLib.LoginScreen
 			Auth.RememberMe = _rememberMe.IsChecked;
 		}
 
-		private void ForgotButton_OnClick(object sender, ClickEventArgs e)
+		private async void ForgotButton_OnClick(object sender, ClickEventArgs e)
 		{
 			if (string.IsNullOrEmpty(Auth.Email))
 			{
-				ScreenManager.AddScreen(new OkScreen("No email address provided.", Content));
+				await ScreenManager.AddScreen(new OkScreen("No email address provided.", Content));
 			}
 			else
 			{
-				Task.Run(async () =>
+				var result = await _playfab.SendAccountRecoveryEmailAsync(new SendAccountRecoveryEmailRequest()
 				{
-					var result = await _playfab.SendAccountRecoveryEmailAsync(new SendAccountRecoveryEmailRequest()
-					{
-						Email = Auth.Email,
-						TitleId = PlayFabSettings.staticSettings.TitleId
-					});
+					Email = Auth.Email,
+					TitleId = PlayFabSettings.staticSettings.TitleId
+				}).ConfigureAwait(false);
 
-					if (null != result.Error)
-					{
-						ScreenManager.AddScreen(new OkScreen(result.Error.ErrorMessage, Content));
-					}
-					else
-					{
-						ScreenManager.AddScreen(new OkScreen("An email was sent with instructions to reset the password.", Content));
-					}
-				});
+				if (null != result.Error)
+				{
+					await ScreenManager.AddScreen(new OkScreen(result.Error.ErrorMessage, Content));
+				}
+				else
+				{
+					await ScreenManager.AddScreen(new OkScreen("An email was sent with instructions to reset the password.", Content));
+				}
 			}
 		}
 

@@ -29,9 +29,9 @@ namespace PlayFabBuddyLib.LoginScreen
 			CoverOtherScreens = true;
 		}
 
-		protected override void AddAddtionalControls()
+		protected override async Task AddAdditionalControls()
 		{
-			base.AddAddtionalControls();
+			await base.AddAdditionalControls();
 
 			OkText = "Create Account";
 			CancelText = "Cancel";
@@ -95,19 +95,16 @@ namespace PlayFabBuddyLib.LoginScreen
 			_password.Text = e.Text;
 		}
 
-		private void AccountNotFoundMessageBox_OnSelect(object sender, ClickEventArgs e)
+		private async void AccountNotFoundMessageBox_OnSelect(object sender, ClickEventArgs e)
 		{
 			if (_password.Text != Auth.Password)
 			{
-				ScreenManager.AddScreen(new OkScreen("The passwords didn't match."));
+				await ScreenManager.AddScreen(new OkScreen("The passwords didn't match."));
 			}
 			else
 			{
 				Auth.AuthType = AuthType.RegisterPlayFabAccount;
-				Task.Run(async () =>
-				{
-					await Auth.Authenticate();
-				});
+				await Auth.Authenticate().ConfigureAwait(false);
 			}
 		}
 

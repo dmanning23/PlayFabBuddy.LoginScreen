@@ -74,7 +74,7 @@
       <HintPath>..\packages\MatrixExtensions.2.0.0\lib\Xamarin.iOS10\MatrixExtensions.iOS.dll</HintPath>
     </Reference>
     <Reference Include="MenuBuddy.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MenuBuddy.2.0.38\lib\Xamarin.iOS10\MenuBuddy.iOS.dll</HintPath>
+      <HintPath>..\packages\MenuBuddy.2.0.42\lib\Xamarin.iOS10\MenuBuddy.iOS.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoGame.Framework.iOS.3.7.1.189\lib\XamariniOS\MonoGame.Framework.dll</HintPath>
@@ -89,13 +89,13 @@
       <HintPath>..\packages\SimpleStorage.1.4.19\lib\Xamarin.iOS10\PerpetualEngine.SimpleStorage.iOS.dll</HintPath>
     </Reference>
     <Reference Include="PlayFabBuddy.Auth.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PlayFabBuddy.Auth.2.0.18\lib\Xamarin.iOS10\PlayFabBuddy.Auth.iOS.dll</HintPath>
+      <HintPath>..\packages\PlayFabBuddy.Auth.2.0.20\lib\Xamarin.iOS10\PlayFabBuddy.Auth.iOS.dll</HintPath>
     </Reference>
     <Reference Include="PlayFabBuddy.Core.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PlayFabBuddy.Core.2.0.11\lib\Xamarin.iOS10\PlayFabBuddy.Core.iOS.dll</HintPath>
+      <HintPath>..\packages\PlayFabBuddy.Core.2.0.14\lib\Xamarin.iOS10\PlayFabBuddy.Core.iOS.dll</HintPath>
     </Reference>
     <Reference Include="PlayFabBuddy.DisplayName.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PlayFabBuddy.DisplayName.2.0.1\lib\Xamarin.iOS10\PlayFabBuddy.DisplayName.iOS.dll</HintPath>
+      <HintPath>..\packages\PlayFabBuddy.DisplayName.2.0.2\lib\Xamarin.iOS10\PlayFabBuddy.DisplayName.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.DeviceInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xam.Plugin.DeviceInfo.4.1.1\lib\xamarinios10\Plugin.DeviceInfo.dll</HintPath>
