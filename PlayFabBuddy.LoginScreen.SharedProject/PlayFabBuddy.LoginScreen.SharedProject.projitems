@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AccountNotFoundMessageBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DisplayNameMessageBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoggingInMessageBox.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ProfileScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginMessageBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginStyleSheet.cs" />
   </ItemGroup>

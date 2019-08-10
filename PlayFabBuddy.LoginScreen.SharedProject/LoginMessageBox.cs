@@ -29,6 +29,12 @@ namespace PlayFabBuddyLib.LoginScreen
 		IButton _guestButton;
 		IButton _facebookButton;
 
+		/// <summary>
+		/// Facebook errors are reported via a flag because Android doesn't let MenuBuddy pop up message boxes from another thread.
+		/// </summary>
+		bool _hasFacebookError { get; set; }
+		Exception _facebookError { get; set; }
+
 		#endregion //Propeties
 
 		#region Methods
@@ -37,6 +43,7 @@ namespace PlayFabBuddyLib.LoginScreen
 		{
 			CoveredByOtherScreens = false;
 			CoverOtherScreens = true;
+			_hasFacebookError = false;
 		}
 
 		public override async Task LoadContent()
@@ -57,6 +64,12 @@ namespace PlayFabBuddyLib.LoginScreen
 			Auth.OnLoginSuccess += Auth_OnLoginSuccess;
 			Auth.OnPlayFabError += Auth_OnPlayFabError;
 			_facebook = ScreenManager.Game.Services.GetService<IFacebookService>();
+
+			if (null != _facebook)
+			{
+				_facebook.OnLoginError -= Facebook_OnLoginError;
+				_facebook.OnLoginError += Facebook_OnLoginError;
+			}
 
 			if (null == Auth)
 			{
@@ -110,6 +123,26 @@ namespace PlayFabBuddyLib.LoginScreen
 			base.UnloadContent();
 			Auth.OnLoginSuccess -= Auth_OnLoginSuccess;
 			Auth.OnPlayFabError -= Auth_OnPlayFabError;
+			_facebook.OnLoginError -= Facebook_OnLoginError;
+		}
+
+		public override async void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
+		{
+			base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
+
+			if (_hasFacebookError)
+			{
+				_hasFacebookError = false;
+				if (null != _facebookError)
+				{
+					await ScreenManager.AddScreen(new OkScreen(_facebookError.Message)).ConfigureAwait(false);
+				}
+				else
+				{
+					await ScreenManager.AddScreen(new OkScreen("An error occurred logging into FaceBook.")).ConfigureAwait(false);
+				}
+				_facebookError = null;
+			}
 		}
 
 		private void AddShim(float height = 8f)
@@ -128,12 +161,12 @@ namespace PlayFabBuddyLib.LoginScreen
 			{
 				case PlayFabErrorCode.AccountNotFound:
 					{
-						await ScreenManager.AddScreen(new AccountNotFoundMessageBox(Content), null);
+						await ScreenManager.AddScreen(new AccountNotFoundMessageBox(Content), null).ConfigureAwait(false);
 					}
 					break;
 				default:
 					{
-						await ScreenManager.AddScreen(new OkScreen(error.ErrorMessage, Content), null);
+						await ScreenManager.AddScreen(new OkScreen(error.ErrorMessage, Content), null).ConfigureAwait(false);
 					}
 					break;
 			}
@@ -144,6 +177,12 @@ namespace PlayFabBuddyLib.LoginScreen
 		private void Auth_OnLoginSuccess(LoginResult success)
 		{
 			ExitScreen();
+		}
+
+		private void Facebook_OnLoginError(Exception ex)
+		{
+			_facebookError = ex;
+			_hasFacebookError = true;
 		}
 
 		#region Add Controls
@@ -370,11 +409,11 @@ namespace PlayFabBuddyLib.LoginScreen
 			//check that an email and password were provided
 			if (string.IsNullOrEmpty(Auth.Email))
 			{
-				await ScreenManager.AddScreen(new OkScreen("Please enter your email address", Content), null);
+				await ScreenManager.AddScreen(new OkScreen("Please enter your email address", Content), null).ConfigureAwait(false);
 			}
 			else if (string.IsNullOrEmpty(Auth.Password))
 			{
-				await ScreenManager.AddScreen(new OkScreen("Please enter your password", Content), null);
+				await ScreenManager.AddScreen(new OkScreen("Please enter your password", Content), null).ConfigureAwait(false);
 			}
 			else
 			{
@@ -413,7 +452,7 @@ namespace PlayFabBuddyLib.LoginScreen
 		{
 			if (string.IsNullOrEmpty(Auth.Email))
 			{
-				await ScreenManager.AddScreen(new OkScreen("No email address provided.", Content));
+				await ScreenManager.AddScreen(new OkScreen("No email address provided.", Content)).ConfigureAwait(false);
 			}
 			else
 			{
@@ -425,11 +464,11 @@ namespace PlayFabBuddyLib.LoginScreen
 
 				if (null != result.Error)
 				{
-					await ScreenManager.AddScreen(new OkScreen(result.Error.ErrorMessage, Content));
+					await ScreenManager.AddScreen(new OkScreen(result.Error.ErrorMessage, Content)).ConfigureAwait(false);
 				}
 				else
 				{
-					await ScreenManager.AddScreen(new OkScreen("An email was sent with instructions to reset the password.", Content));
+					await ScreenManager.AddScreen(new OkScreen("An email was sent with instructions to reset the password.", Content)).ConfigureAwait(false);
 				}
 			}
 		}
