@@ -1,5 +1,6 @@
 ﻿using MenuBuddy;
 using Microsoft.Xna.Framework.Content;
+using System.Threading.Tasks;
 
 namespace PlayFabBuddyLib.LoginScreen
 {
@@ -11,8 +12,9 @@ namespace PlayFabBuddyLib.LoginScreen
 			CoverOtherScreens = true;
 		}
 
-		protected override void AddButtons(StackLayout stack)
+		protected override Task AddButtons(StackLayout stack)
 		{
+			return Task.CompletedTask;
 		}
 	}
 }

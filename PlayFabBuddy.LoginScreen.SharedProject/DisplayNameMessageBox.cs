@@ -64,9 +64,10 @@ namespace PlayFabBuddyLib.LoginScreen
 			ControlStack.AddItem(new Shim() { Size = new Vector2(0, height) });
 		}
 
-		protected override void AddButtons(StackLayout stack)
+		protected override Task AddButtons(StackLayout stack)
 		{
 			//Don't add Ok or Cancel buttons to this message box, the user has to select one of the provided options.
+			return Task.CompletedTask;
 		}
 
 		#region Add Controls

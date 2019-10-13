@@ -150,9 +150,10 @@ namespace PlayFabBuddyLib.LoginScreen
 			ControlStack.AddItem(new Shim() { Size = new Vector2(0, height) });
 		}
 
-		protected override void AddButtons(StackLayout stack)
+		protected override Task AddButtons(StackLayout stack)
 		{
 			//Don't add Ok or Cancel buttons to this message box, the user has to select one of the provided options.
+			return Task.CompletedTask;
 		}
 
 		private async void Auth_OnPlayFabError(PlayFabError error)
@@ -240,24 +241,49 @@ namespace PlayFabBuddyLib.LoginScreen
 
 		private void AddLogRegisterButton(Vector2 controlSize)
 		{
-			_loginButton = new RelativeLayoutButton()
-			{
-				Vertical = VerticalAlignment.Center,
-				Horizontal = HorizontalAlignment.Center,
-				Size = new Vector2(controlSize.X, controlSize.Y * 1.4f),
-				HasBackground = true,
-				Highlightable = false,
-			};
-			_loginButton.AddItem(new Label(@"Login/Register", Content, FontSize.Small)
-			{
-				Vertical = VerticalAlignment.Center,
-				Horizontal = HorizontalAlignment.Center,
-				Highlightable = false,
-			});
+			_loginButton = CreateButton(controlSize, @"Login/Register");
 			ControlStack.AddItem(_loginButton);
 			_loginButton.OnClick += LoginRegister_OnClick;
 
 			AddShim();
+		}
+
+		private IButton CreateButton(Vector2 controlSize, string text)
+		{
+			//check if there is a button background image
+			var hasBackgroundImage = !string.IsNullOrEmpty(LoginStyleSheet.ButtonBackgroundImage);
+			var button = new RelativeLayoutButton()
+			{
+				Vertical = VerticalAlignment.Center,
+				Horizontal = HorizontalAlignment.Center,
+				Size = new Vector2(controlSize.X, controlSize.Y * 1.9f),
+				HasBackground = !hasBackgroundImage,
+				Highlightable = false,
+			};
+
+			if (hasBackgroundImage)
+			{
+				button.AddItem(new Image(Content.Load<Texture2D>(LoginStyleSheet.ButtonBackgroundImage))
+				{
+					Vertical = VerticalAlignment.Center,
+					Horizontal = HorizontalAlignment.Center,
+					Highlightable = false,
+					FillRect = true,
+					Size = button.Rect.Size.ToVector2(),
+					PulsateOnHighlight = false,
+					Layer = 10,
+				});
+			}
+
+			button.AddItem(new Label(text, Content, FontSize.Small)
+			{
+				Vertical = VerticalAlignment.Center,
+				Horizontal = HorizontalAlignment.Center,
+				Highlightable = false,
+				Layer = 11,
+			});
+
+			return button;
 		}
 
 		private void AddFacebookButton(Vector2 controlSize)
@@ -267,7 +293,7 @@ namespace PlayFabBuddyLib.LoginScreen
 			{
 				Vertical = VerticalAlignment.Center,
 				Horizontal = HorizontalAlignment.Center,
-				Size = new Vector2(controlSize.X, controlSize.Y * 1.4f),
+				Size = new Vector2(controlSize.X, controlSize.Y * 1.9f),
 				HasBackground = false,
 				Highlightable = false,
 			};
@@ -295,20 +321,7 @@ namespace PlayFabBuddyLib.LoginScreen
 
 		private void AddGuestButton(Vector2 controlSize)
 		{
-			_guestButton = new RelativeLayoutButton()
-			{
-				Vertical = VerticalAlignment.Center,
-				Horizontal = HorizontalAlignment.Center,
-				Size = new Vector2(controlSize.X, controlSize.Y * 1.4f),
-				HasBackground = true,
-				Highlightable = false,
-			};
-			_guestButton.AddItem(new Label(@"Guest", Content, FontSize.Small)
-			{
-				Vertical = VerticalAlignment.Center,
-				Horizontal = HorizontalAlignment.Center,
-				Highlightable = false,
-			});
+			_guestButton = CreateButton(controlSize, @"Guest");
 			ControlStack.AddItem(_guestButton);
 			_guestButton.OnClick += Guest_OnClick;
 		}

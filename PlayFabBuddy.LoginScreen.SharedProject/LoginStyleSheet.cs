@@ -11,6 +11,8 @@ namespace PlayFabBuddyLib.LoginScreen
 
 		public static string FacebookButtonBackgroundImage { get; set; }
 
+		public static string ButtonBackgroundImage { get; set; }
+
 		#endregion //Options
 
 		#region Methods
@@ -19,6 +21,7 @@ namespace PlayFabBuddyLib.LoginScreen
 		{
 			DisplayNameFontResource = @"Fonts\ariblk";
 			FacebookButtonBackgroundImage = "FacebookButton";
+			ButtonBackgroundImage = string.Empty;
 			AddFacebookButtonText = true;
 		}
 
