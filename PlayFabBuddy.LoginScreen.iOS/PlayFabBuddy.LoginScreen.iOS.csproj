@@ -35,19 +35,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Facebook.CoreKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Facebook.CoreKit.iOS.5.0.2\lib\xamarinios10\Facebook.CoreKit.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Facebook.CoreKit.iOS.5.0.2.1\lib\xamarinios10\Facebook.CoreKit.dll</HintPath>
     </Reference>
     <Reference Include="Facebook.LoginKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Facebook.LoginKit.iOS.5.0.2\lib\xamarinios10\Facebook.LoginKit.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Facebook.LoginKit.iOS.5.0.2.1\lib\xamarinios10\Facebook.LoginKit.dll</HintPath>
     </Reference>
     <Reference Include="Facebook.MarketingKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Facebook.MarketingKit.iOS.5.0.0\lib\xamarinios10\Facebook.MarketingKit.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Facebook.MarketingKit.iOS.5.0.0.1\lib\xamarinios10\Facebook.MarketingKit.dll</HintPath>
     </Reference>
     <Reference Include="Facebook.PlacesKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Facebook.PlacesKit.iOS.5.0.2\lib\xamarinios10\Facebook.PlacesKit.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Facebook.PlacesKit.iOS.5.0.2.1\lib\xamarinios10\Facebook.PlacesKit.dll</HintPath>
     </Reference>
     <Reference Include="Facebook.ShareKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Facebook.ShareKit.iOS.5.0.2\lib\xamarinios10\Facebook.ShareKit.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Facebook.ShareKit.iOS.5.0.2.1\lib\xamarinios10\Facebook.ShareKit.dll</HintPath>
     </Reference>
     <Reference Include="FacebookLoginBuddy.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FBLoginBuddy.2.0.3\lib\Xamarin.iOS10\FacebookLoginBuddy.iOS.dll</HintPath>
@@ -56,16 +56,13 @@
       <HintPath>..\packages\FilenameBuddy.2.0.8\lib\Xamarin.iOS10\FilenameBuddy.iOS.dll</HintPath>
     </Reference>
     <Reference Include="FontBuddyLib.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FontBuddy.2.0.6\lib\Xamarin.iOS10\FontBuddyLib.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="FontBuddyPlusLib.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FontBuddyPlus.2.0.6\lib\Xamarin.iOS10\FontBuddyPlusLib.iOS.dll</HintPath>
+      <HintPath>..\packages\FontBuddy.2.0.15\lib\Xamarin.iOS10\FontBuddyLib.iOS.dll</HintPath>
     </Reference>
     <Reference Include="GameTimer.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GameTimer.2.0.0\lib\Xamarin.iOS10\GameTimer.iOS.dll</HintPath>
     </Reference>
     <Reference Include="HadoukInput.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HadoukInput.2.0.21\lib\Xamarin.iOS10\HadoukInput.iOS.dll</HintPath>
+      <HintPath>..\packages\HadoukInput.2.0.27\lib\Xamarin.iOS10\HadoukInput.iOS.dll</HintPath>
     </Reference>
     <Reference Include="InputHelper.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\InputHelper.2.0.6\lib\Xamarin.iOS10\InputHelper.iOS.dll</HintPath>
@@ -74,7 +71,7 @@
       <HintPath>..\packages\MatrixExtensions.2.0.0\lib\Xamarin.iOS10\MatrixExtensions.iOS.dll</HintPath>
     </Reference>
     <Reference Include="MenuBuddy.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MenuBuddy.2.0.47\lib\Xamarin.iOS10\MenuBuddy.iOS.dll</HintPath>
+      <HintPath>..\packages\MenuBuddy.2.0.57\lib\Xamarin.iOS10\MenuBuddy.iOS.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoGame.Framework.iOS.3.7.1.189\lib\XamariniOS\MonoGame.Framework.dll</HintPath>
@@ -83,10 +80,10 @@
       <HintPath>..\packages\MouseBuddy.2.0.2\lib\Xamarin.iOS10\MouseBuddy.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PerpetualEngine.SimpleStorage.iOS, Version=1.0.6901.26682, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleStorage.1.4.19\lib\Xamarin.iOS10\PerpetualEngine.SimpleStorage.iOS.dll</HintPath>
+    <Reference Include="PerpetualEngine.SimpleStorage.iOS, Version=1.0.7191.30635, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleStorage.1.4.20\lib\Xamarin.iOS10\PerpetualEngine.SimpleStorage.iOS.dll</HintPath>
     </Reference>
     <Reference Include="PlayFabBuddy.Auth.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PlayFabBuddy.Auth.2.0.26\lib\Xamarin.iOS10\PlayFabBuddy.Auth.iOS.dll</HintPath>
@@ -130,7 +127,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>

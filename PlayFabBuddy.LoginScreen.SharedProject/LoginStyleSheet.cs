@@ -1,4 +1,5 @@
-﻿
+﻿using MenuBuddy;
+
 namespace PlayFabBuddyLib.LoginScreen
 {
 	public abstract class LoginStyleSheet
@@ -8,6 +9,8 @@ namespace PlayFabBuddyLib.LoginScreen
 		public static bool AddFacebookButtonText { get; set; }
 
 		public static string DisplayNameFontResource { get; set; }
+
+		public static int DisplayNameFontSize { get; set; }
 
 		public static string FacebookButtonBackgroundImage { get; set; }
 
@@ -19,7 +22,8 @@ namespace PlayFabBuddyLib.LoginScreen
 
 		static LoginStyleSheet()
 		{
-			DisplayNameFontResource = @"Fonts\ariblk";
+			DisplayNameFontResource = StyleSheet.SmallFontResource;
+			DisplayNameFontSize = 48;
 			FacebookButtonBackgroundImage = "FacebookButton";
 			ButtonBackgroundImage = string.Empty;
 			AddFacebookButtonText = true;

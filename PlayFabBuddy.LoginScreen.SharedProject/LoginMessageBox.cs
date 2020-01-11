@@ -1,5 +1,5 @@
 ﻿using FacebookLoginLib;
-using FontBuddyPlusLib;
+using FontBuddyLib;
 using InputHelper;
 using MenuBuddy;
 using Microsoft.Xna.Framework;
@@ -78,7 +78,7 @@ namespace PlayFabBuddyLib.LoginScreen
 
 			AddShim(64f);
 
-			ControlStack.AddItem(new Label("Sign In", Content, FontSize.Medium)
+			ControlStack.AddItem(new Label("Sign In", Content, FontSize.Medium, StyleSheet.MediumFontResource, null, StyleSheet.MediumFontSize)
 			{
 				Horizontal = HorizontalAlignment.Center,
 				Vertical = VerticalAlignment.Bottom,
@@ -190,11 +190,8 @@ namespace PlayFabBuddyLib.LoginScreen
 
 		private void AddEmailEditBox(Vector2 controlSize)
 		{
-			var font = new FontBuddyPlus()
-			{
-				FontSize = 48f
-			};
-			font.LoadContent(Content, LoginStyleSheet.DisplayNameFontResource);
+			var font = new FontBuddyPlus();
+			font.LoadContent(Content, LoginStyleSheet.DisplayNameFontResource, true, LoginStyleSheet.DisplayNameFontSize);
 
 			var text = !String.IsNullOrEmpty(Auth.Email) ? Auth.Email : "Email address...";
 			_email = new TextEditWithDialog(text, font)

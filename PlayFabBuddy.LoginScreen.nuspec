@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>PlayFabBuddy.LoginScreen</id>
-		<version>2.0.31</version>
+		<version>2.0.37</version>
 		<title>PlayFabBuddy.LoginScreen</title>
 		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
@@ -24,7 +24,6 @@
 				<dependency id="Xam.Plugin.DeviceInfo" version="4.1"/>
 				<dependency id="Plugin.CurrentActivity" version="2.1"/>
 				<dependency id="MenuBuddy" version="2.0"/>
-				<dependency id="FontBuddyPlus" version="2.0"/>
 			</group>
 
 			<!--Xamarin.iOS Unified-->
@@ -35,7 +34,6 @@
 				<dependency id="SimpleStorage" version="1.4"/>
 				<dependency id="Xam.Plugin.DeviceInfo" version="4.1"/>
 				<dependency id="MenuBuddy" version="2.0"/>
-				<dependency id="FontBuddyPlus" version="2.0"/>
 			</group>
 
 
@@ -46,7 +44,6 @@
 				<dependency id="SimpleStorage" version="1.4"/>
 				<dependency id="Xam.Plugin.DeviceInfo" version="4.1"/>
 				<dependency id="MenuBuddy" version="2.0"/>
-				<dependency id="FontBuddyPlus" version="2.0"/>
 			</group>
 
 		</dependencies>
