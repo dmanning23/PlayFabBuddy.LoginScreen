@@ -123,7 +123,11 @@ namespace PlayFabBuddyLib.LoginScreen
 			base.UnloadContent();
 			Auth.OnLoginSuccess -= Auth_OnLoginSuccess;
 			Auth.OnPlayFabError -= Auth_OnPlayFabError;
-			_facebook.OnLoginError -= Facebook_OnLoginError;
+
+			if (null != _facebook)
+			{
+				_facebook.OnLoginError -= Facebook_OnLoginError;
+			}
 		}
 
 		public override async void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
@@ -204,12 +208,17 @@ namespace PlayFabBuddyLib.LoginScreen
 				MessageBoxDescription = "Enter your email address:",
 				IsPassword = false,
 				TextColor = StyleSheet.MessageBoxTextColor,
+				Highlightable = true,
 			};
 			ControlStack.AddItem(_email);
 			_email.OnPopupDialog += _email_OnPopupDialog;
 			_email.OnTextEdited += Email_OnTextEdited;
 
+			_email.TextLabel.Highlightable = true;
+
 			AddShim();
+
+			AddMenuItem(_email);
 		}
 
 		private void AddPasswordEditBox(Vector2 controlSize)
@@ -227,13 +236,15 @@ namespace PlayFabBuddyLib.LoginScreen
 				MessageBoxDescription = "Enter your password:",
 				IsPassword = hasPassword,
 				TextColor = StyleSheet.MessageBoxTextColor,
-				Highlightable = false,
+				Highlightable = true,
 			};
 			ControlStack.AddItem(_password);
 			_password.OnPopupDialog += _password_OnPopupDialog;
 			_password.OnTextEdited += Password_OnTextEdited;
 
 			AddShim();
+
+			AddMenuItem(_password);
 		}
 
 		private void AddLogRegisterButton(Vector2 controlSize)
@@ -243,6 +254,8 @@ namespace PlayFabBuddyLib.LoginScreen
 			_loginButton.OnClick += LoginRegister_OnClick;
 
 			AddShim();
+
+			AddMenuItem(_loginButton);
 		}
 
 		private IButton CreateButton(Vector2 controlSize, string text)
@@ -255,7 +268,7 @@ namespace PlayFabBuddyLib.LoginScreen
 				Horizontal = HorizontalAlignment.Center,
 				Size = new Vector2(controlSize.X, controlSize.Y * 1.9f),
 				HasBackground = !hasBackgroundImage,
-				Highlightable = false,
+				Highlightable = true,
 			};
 
 			if (hasBackgroundImage)
@@ -276,7 +289,7 @@ namespace PlayFabBuddyLib.LoginScreen
 			{
 				Vertical = VerticalAlignment.Center,
 				Horizontal = HorizontalAlignment.Center,
-				Highlightable = false,
+				Highlightable = true,
 				Layer = 11,
 			});
 
@@ -292,7 +305,7 @@ namespace PlayFabBuddyLib.LoginScreen
 				Horizontal = HorizontalAlignment.Center,
 				Size = new Vector2(controlSize.X, controlSize.Y * 1.9f),
 				HasBackground = false,
-				Highlightable = false,
+				Highlightable = true,
 			};
 			_facebookButton.AddItem(new Image(Content.Load<Texture2D>(LoginStyleSheet.FacebookButtonBackgroundImage))
 			{
@@ -313,7 +326,10 @@ namespace PlayFabBuddyLib.LoginScreen
 				});
 			}
 			ControlStack.AddItem(_facebookButton);
-			_facebookButton.OnClick += _facebookButton_OnClick; ;
+			
+			_facebookButton.OnClick += _facebookButton_OnClick;
+
+			AddMenuItem(_loginButton);
 		}
 
 		private void AddGuestButton(Vector2 controlSize)
@@ -321,6 +337,8 @@ namespace PlayFabBuddyLib.LoginScreen
 			_guestButton = CreateButton(controlSize, @"Guest");
 			ControlStack.AddItem(_guestButton);
 			_guestButton.OnClick += Guest_OnClick;
+
+			AddMenuItem(_guestButton);
 		}
 
 		private void AddRememberCheckbox(Vector2 controlSize)
@@ -339,7 +357,7 @@ namespace PlayFabBuddyLib.LoginScreen
 				Size = new Vector2(controlSize.X / 2, controlSize.Y),
 				Horizontal = HorizontalAlignment.Left,
 				Vertical = VerticalAlignment.Center,
-				Highlightable = false,
+				Highlightable = true,
 			};
 			_rememberMe = new Checkbox(Auth.RememberMe)
 			{
@@ -353,7 +371,7 @@ namespace PlayFabBuddyLib.LoginScreen
 			{
 				Horizontal = HorizontalAlignment.Center,
 				Vertical = VerticalAlignment.Center,
-				Highlightable = false,
+				Highlightable = true,
 				Scale = 0.7f,
 				TextColor = StyleSheet.MessageBoxTextColor,
 			});
@@ -367,20 +385,24 @@ namespace PlayFabBuddyLib.LoginScreen
 				Size = new Vector2(controlSize.X / 2, controlSize.Y),
 				Horizontal = HorizontalAlignment.Right,
 				Vertical = VerticalAlignment.Center,
-				Highlightable = false,
+				Highlightable = true,
 			};
 			forgotButton.AddItem(new Label("Forgot Password", Content, FontSize.Small)
 			{
 				Horizontal = HorizontalAlignment.Right,
 				Vertical = VerticalAlignment.Center,
-				Highlightable = false,
+				Highlightable = true,
 				Scale = 0.7f,
 				TextColor = StyleSheet.MessageBoxTextColor,
 			});
+
 			remeberRow.AddItem(forgotButton);
 			forgotButton.OnClick += ForgotButton_OnClick;
 
 			ControlStack.AddItem(remeberRow);
+
+			AddMenuItem(rememberButton, 10);
+			AddMenuItem(forgotButton, 20);
 		}
 
 		#endregion //Add Controls
